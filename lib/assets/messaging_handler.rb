@@ -197,6 +197,9 @@ class MessagingHandler
     store = Store.find_by_id(navigations[1].destination_store_id)
     return unless store
 
+    navigations[1].arrived = 1
+    navigations[1].save if navigations[1].valid?
+
     @messages.push({:text => "#{RATING_TEXT}#{store.name} is #{rating}?"})
     @messages.push({
       :button => {
